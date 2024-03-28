@@ -6,7 +6,6 @@ namespace GoogleCalendarWebApp.Controllers
 {
     public class HomeController : Controller
     {
-
         public ActionResult Index()
         {
             return View();
@@ -15,7 +14,7 @@ namespace GoogleCalendarWebApp.Controllers
         public ActionResult OauthRedirect()
         {
 
-            var credentialsFile = "/Users/edrisym/Desktop/Hrg-Project-Google-Calender/HRGMeetingSchedulerAPI/File/Credentials.json";
+            var credentialsFile = "/Users/edrisym/Desktop/webApp/File/Credentials.json";
 
             var credentials = JObject.Parse(System.IO.File.ReadAllText(credentialsFile));
 
@@ -29,7 +28,7 @@ namespace GoogleCalendarWebApp.Controllers
                                 "state=hellothere&" +
                                 "redirect_uri=https://localhost:7130/oauth/callback&" +
                                 "client_id=" + client_id;
-
+            System.Console.WriteLine("redirectUrl was successfull");
             return Redirect(redirectUrl);
         }
     }

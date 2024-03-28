@@ -12,6 +12,21 @@
         Sign In
     </button>
 
+<form  method="post" action="CalendarEvent/CreateEvent">
+        <label for="Summary">Summary:</label>
+        <input type="text" id="Summary" name="Summary" required><br><br>
+        
+        <label for="Description">Description:</label>
+        <input type="text" id="Description" name="Description" required><br><br>
+        
+        <label for="Start.DateTime">Start:</label>
+        <input type="datetime" id="Start" name="Start.DateTime" required><br><br>
+        
+        <label for="End.DateTime">End:</label>
+        <input type="datetime" id="End" name="End.DateTime" required><br><br>
+
+        <input type="submit" value="submit" class="btn btn-primary" />
+    </form>
 
 
 </div>
