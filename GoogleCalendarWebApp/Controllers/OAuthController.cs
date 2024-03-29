@@ -45,7 +45,7 @@ namespace GoogleCalendarWebApp.Controllers
                 System.Console.WriteLine("StatusCode is OK!");
                 System.IO.File.WriteAllText(tokenFile, response.Content);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { status = "success" });
             }
             return View("Error");
         }
@@ -96,7 +96,7 @@ namespace GoogleCalendarWebApp.Controllers
             request.AddQueryParameter("token", token["access_token"].ToString());
 
             restClient = new RestClient("https://oauth2.googleapis.com/revoke");
-            var response = restClient.Post(request);
+            var response = restClient.ExecutePost(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {

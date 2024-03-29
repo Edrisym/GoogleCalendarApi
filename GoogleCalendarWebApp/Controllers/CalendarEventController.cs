@@ -28,15 +28,15 @@ public class CalendarEventController : Controller
         // var restClient = new RestClient();
         // var restRequest = new RestRequest();
 
-        // var timeNow = DateTime.UtcNow;
+        // var timeNow = DateTime.UtcNow;ssssss
 
         // restClient = new RestClient(googleEventUrl);
 
         var newEvent = new Event()
         {
-            Summary = "Google I/O 2015",
-            Location = "800 Howard St., San Francisco, CA 94103",
-            Description = "A chance to hear more about Google's developer products.",
+            Summary = "this is an invitation",
+            Location = "herwe",
+            Description = "edris.",
             Start = new EventDateTime()
             {
 
@@ -88,8 +88,16 @@ public class CalendarEventController : Controller
 
         var calendarId = "primary";
         EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
-        Event createdEvent = request.Execute();
-        Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+        try
+        {
+            Event createdEvent = request.Execute();
+            Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+        }
+        catch (System.Exception ex)
+        {
+
+            throw ex;
+        }
 
         return RedirectToAction("Index", "Home", new { status = "success" });
     }
