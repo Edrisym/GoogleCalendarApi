@@ -12,6 +12,15 @@
         Sign In
     </button>
 
+
+<button class="btn btn-primary" style="margin-top: 20px;" onclick="location.href='@Url.Action("RevokeToken", "OAuth")'">
+        Revoke Token
+    </button>
+
+    <button class="btn btn-primary" style="margin-top: 20px;" onclick="location.href='@Url.Action("RefreshToken", "OAuth")'">
+        Refresh Token
+    </button>
+
 <form  method="post" action="CalendarEvent/CreateEvent">
         <label for="Summary">Summary:</label>
         <input type="text" id="Summary" name="Summary" required><br><br>

@@ -8,7 +8,7 @@ namespace GoogleCalendarWebApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         public ActionResult OauthRedirect()
@@ -19,17 +19,17 @@ namespace GoogleCalendarWebApp.Controllers
             var credentials = JObject.Parse(System.IO.File.ReadAllText(credentialsFile));
 
             var client_id = credentials["client_id"];
-            var redirectUrl =
+            var redirectUri =
                                 "https://accounts.google.com/o/oauth2/v2/auth?" +
                                 "scope=https://www.googleapis.com/auth/calendar+https://www.googleapis.com/auth/calendar.events&" +
                                 "access_type=offline&" +
                                 "include_granted_scopes=true&" +
                                 "response_type=code&" +
-                                "state=hellothere&" +
+                                "state=successful&" +
                                 "redirect_uri=https://localhost:7130/oauth/callback&" +
                                 "client_id=" + client_id;
             System.Console.WriteLine("redirectUrl was successfull");
-            return Redirect(redirectUrl);
+            return Redirect(redirectUri);
         }
     }
 }
