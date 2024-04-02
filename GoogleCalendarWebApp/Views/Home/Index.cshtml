@@ -8,10 +8,13 @@
 
 
 
-    <button class="btn btn-primary" style="margin-top: 20px;" onclick="location.href='@Url.Action("OauthRedirect", "Home")'">
+    @* <button class="btn btn-primary" style="margin-top: 20px;" onclick="location.href='@Url.Action("OauthRedirect", "Home")'">
+        Sign In
+    </button> *@
+
+<button class="btn btn-primary" style="margin-top: 20px;" onclick="location.href='@Url.Action("GetAuthCode", "Home")'">
         Sign In
     </button>
-
 
 <button class="btn btn-primary" style="margin-top: 20px;" onclick="location.href='@Url.Action("RevokeToken", "OAuth")'">
         Revoke Token

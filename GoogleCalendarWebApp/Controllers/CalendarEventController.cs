@@ -1,4 +1,3 @@
-using System.Globalization;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
@@ -6,10 +5,7 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using RestSharp;
 
 namespace GoogleCalendarWebApp.Controllers;
 
@@ -24,13 +20,6 @@ public class CalendarEventController : Controller
         string tokenFile = "/Users/edrisym/Desktop/webApp/File/token.json";
         var tokens = JObject.Parse(System.IO.File.ReadAllText(tokenFile));
         var credential = JObject.Parse(System.IO.File.ReadAllText(credentialFile));
-        //TODO
-        // var restClient = new RestClient();
-        // var restRequest = new RestRequest();
-
-        // var timeNow = DateTime.UtcNow;ssssss
-
-        // restClient = new RestClient(googleEventUrl);
 
         var newEvent = new Event()
         {
@@ -90,6 +79,7 @@ public class CalendarEventController : Controller
         EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
         try
         {
+            request.SendNotifications = true;
             Event createdEvent = request.Execute();
             Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
         }
