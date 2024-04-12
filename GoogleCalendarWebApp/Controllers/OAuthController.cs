@@ -31,7 +31,9 @@ namespace GoogleCalendarWebApp.Controllers
             request.AddQueryParameter("client_id", credentials["client_id"].ToString());
             request.AddQueryParameter("client_secret", credentials["client_secret"].ToString());
             request.AddQueryParameter("code", code);
+            request.AddQueryParameter("access_type", "offline");
             request.AddQueryParameter("grant_type", "authorization_code");
+            // request.AddQueryParameter("prompt", "consent");
             request.AddQueryParameter("redirect_uri", "https://localhost:7130/oauth/callback");
 
             restClient = new RestClient(refreshToken);
@@ -49,6 +51,7 @@ namespace GoogleCalendarWebApp.Controllers
             }
             return View("Error");
         }
+
 
 
         public ActionResult RefreshToken()
@@ -79,7 +82,9 @@ namespace GoogleCalendarWebApp.Controllers
                 System.Console.WriteLine("request was successfully sent!");
                 var newTokens = JObject.Parse(response.Content);
                 newTokens["refresh_token"] = token["refresh_token"].ToString();
+
                 System.IO.File.WriteAllText(tokenFile, newTokens.ToString());
+
                 return RedirectToAction("Index", "Home", new { status = "success" });
             }
             return View("Error");
@@ -101,7 +106,7 @@ namespace GoogleCalendarWebApp.Controllers
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var newtoken = JObject.Parse(System.IO.File.ReadAllText(tokenFile));
-                System.Console.WriteLine($"successfully revoked the token = {0}", newtoken);
+                System.Console.WriteLine("successfully revoked the token = {0}", newtoken);
                 return RedirectToAction("Index", "Home", new { status = "success" });
             }
 

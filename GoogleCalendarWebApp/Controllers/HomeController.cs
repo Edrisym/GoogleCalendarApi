@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Newtonsoft.Json.Linq;
 
 namespace GoogleCalendarWebApp.Controllers
@@ -34,10 +35,10 @@ namespace GoogleCalendarWebApp.Controllers
         //     return Redirect(redirectUri);
         // }
 
-        // public async Task<IActionResult> GoogleAuth()
-        // {
-        //     return Redirect(_googleCalendarService.GetAuthCode());
-        // }
+        public ActionResult GoogleAuth()
+        {
+            return Redirect(GetAuthCode());
+        }
 
 
         public string GetAuthCode()
@@ -59,14 +60,13 @@ namespace GoogleCalendarWebApp.Controllers
                 var mainURL = string.Format(scopeURL1, redirect_uri_encode, state, response_type, client_id, scope, access_type, include_granted_scopes);
 
                 return mainURL;
+
             }
             catch (Exception ex)
             {
                 return ex.ToString();
             }
         }
-
-
     }
 
     public static class Method
